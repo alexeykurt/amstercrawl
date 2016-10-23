@@ -148,6 +148,7 @@ class Crawler(object):
             links_to_check = self.get_next_unprocessed_links(link, body)
             if links_to_check:
                 logging.info("found {0} new links to check for in {1}".format(len(links_to_check), link))
+                del body, link, already_saved
                 await asyncio.wait([self.process_link(link) for link in links_to_check])
 
     def process(self, link):
